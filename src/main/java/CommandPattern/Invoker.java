@@ -1,18 +1,12 @@
 package CommandPattern;
 
+import Commands.*;
 import Entities.Person;
-import global.CollectionManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Invoker {
-
-    private CollectionManager collectionManager;
-
-    public Invoker(CollectionManager collectionManager) {
-        this.collectionManager = collectionManager;
-    }
 
     private final HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -20,9 +14,28 @@ public class Invoker {
         commandMap.put(commandName, command);
     }
 
-    public String execute(String commandName, ArrayList<Person> collection, String argument) {
+    public Invoker(Receiver receiver) {
+        this.register(String.valueOf(CommandName.ADD), new Add(receiver));
+        this.register(String.valueOf(CommandName.ADD_IF_MIN), new AddIfMin(receiver));
+        this.register(String.valueOf(CommandName.CLEAR), new Clear(receiver));
+        this.register(String.valueOf(CommandName.EXECUTE_SCRIPT), new ExecuteScript(receiver));
+        this.register(String.valueOf(CommandName.EXIT), new Exit(receiver));
+        this.register(String.valueOf(CommandName.FILTER_GREATER_THAN_NATIONALITY), new FilterGreaterThanNationality(receiver));
+        this.register(String.valueOf(CommandName.HELP), new Help());
+        this.register(String.valueOf(CommandName.INFO), new Info(receiver));
+        this.register(String.valueOf(CommandName.PRINT_DESCENDING), new PrintDescending(receiver));
+        this.register(String.valueOf(CommandName.PRINT_FIELD_DESCENDING_ORDER), new PrintFieldDescendingOrder(receiver));
+        this.register(String.valueOf(CommandName.REMOVE_AT), new RemoveAt(receiver));
+        this.register(String.valueOf(CommandName.REMOVE_BY_ID), new RemoveById(receiver));
+        this.register(String.valueOf(CommandName.REORDER), new Reorder(receiver));
+        this.register(String.valueOf(CommandName.SAVE), new Save(receiver));
+        this.register(String.valueOf(CommandName.SHOW), new Show(receiver));
+        this.register(String.valueOf(CommandName.UPDATE), new Update(receiver));
+    }
+
+    public boolean execute(String commandName, ArrayList<Person> collection, String[] args) {
         Command command = commandMap.get(commandName);
-        return command.execute(this, collection, argument);
+        return command.execute(this, collection, args);
     }
 
     public HashMap<String, Command> getCommandMap() {

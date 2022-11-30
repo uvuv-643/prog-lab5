@@ -1,10 +1,9 @@
 package Input.Validation.CustomValidators;
 
 import Entities.Color;
-import Entities.Country;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import java.util.Optional;
 
@@ -17,9 +16,9 @@ public class EyeColorValidator implements Validator {
         }
         Optional<Color> color = switch (data) {
             case null, "" -> Optional.empty();
-            case "black" -> Optional.of(Color.BLACK);
-            case "blue" -> Optional.of(Color.BLUE);
-            case "yellow" -> Optional.of(Color.YELLOW);
+            case "BLACK" -> Optional.of(Color.BLACK);
+            case "BLUE" -> Optional.of(Color.BLUE);
+            case "YELLOW" -> Optional.of(Color.YELLOW);
             default -> null;
         };
         if (color == null) {

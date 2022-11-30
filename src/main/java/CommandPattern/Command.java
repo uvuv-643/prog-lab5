@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface Command {
 
-    String execute(Invoker invoker, ArrayList<Person> collection, String argument);
+    boolean execute(Invoker invoker, ArrayList<Person> collection, String[] args);
     String getHelp();
 
 }

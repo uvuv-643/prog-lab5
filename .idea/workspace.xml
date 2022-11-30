@@ -4,40 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37bcb50a-3448-4a32-860a-42f0cf44fb21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Invoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Receiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Coordinates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Country.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Location.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Generators/Generator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Generators/IDGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/InputManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/CoordinatesValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/EyeColorValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/HeightValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/IDValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/LocationValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NameValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NationalityValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/WeightValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/ValidatedData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/Validator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/PersonException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/ValidationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/global/CollectionManager.java" afterDir="false" />
+    <list default="true" id="37bcb50a-3448-4a32-860a-42f0cf44fb21" name="Changes" comment="First commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/App/AddCommands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/App/Terminal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/CommandName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Add.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/AddIfMin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Clear.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/ExecuteScript.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Exit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/FilterGreaterThanNationality.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Help.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/PrintDescending.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/PrintFieldDescendingOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/RemoveAt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/RemoveById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Reorder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Save.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Show.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Commands/Update.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Adapters/TimeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Input/FileManager/FileManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/IndexValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CommandPattern/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CommandPattern/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CommandPattern/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CommandPattern/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Generators/IDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Generators/IDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/InputManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/CoordinatesValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/CoordinatesValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/EyeColorValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/EyeColorValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/HeightValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/HeightValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/IDValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/IDValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/LocationValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/LocationValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NameValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NameValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NationalityValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/NationalityValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/WeightValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/CustomValidators/WeightValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Input/Validation/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Input/Validation/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/PersonException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Exceptions/PersonException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Exceptions/ValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/global/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App/CollectionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +62,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -59,21 +74,37 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2I8my12x0iB8yc7xXL605SIPYdq" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.34827587",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Input.Validation.CustomValidators" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-1.8" />
+      <envs>
+        <env name="path" value="./test" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="lab5" />
       <method v="2">
@@ -92,8 +123,20 @@
       <workItem from="1669571842079" duration="5394000" />
       <workItem from="1669583183707" duration="11744000" />
       <workItem from="1669599478885" duration="4396000" />
-      <workItem from="1669645817033" duration="4179000" />
+      <workItem from="1669645817033" duration="8519000" />
+      <workItem from="1669674824650" duration="7276000" />
+      <workItem from="1669724076120" duration="1682000" />
+      <workItem from="1669743738868" duration="11828000" />
+      <workItem from="1669771301533" duration="5110000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit">
+      <created>1669651945596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669651945596</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,5 +152,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
   </component>
 </project>

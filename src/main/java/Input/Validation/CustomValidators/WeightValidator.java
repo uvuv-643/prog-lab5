@@ -2,15 +2,19 @@ package Input.Validation.CustomValidators;
 
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public class WeightValidator implements Validator {
 
     @Override
-    public ValidatedData<Integer> validate(String data) throws ValidationException {
-        int weight;
+    public ValidatedData<Float> validate(String data) throws ValidationException {
+        if (data == null) {
+            throw new ValidationException("Weight cannot be null");
+        }
+        data = data.trim();
+        float weight;
         try {
-            weight = Integer.parseInt(data);
+            weight = Float.parseFloat(data);
             if (weight <= 0) {
                 throw new ValidationException("Weight must be greater than zero");
             }
@@ -20,7 +24,7 @@ public class WeightValidator implements Validator {
         return new ValidatedData<>(weight);
     }
 
-    public ValidatedData<Integer> validate(int data) throws ValidationException {
+    public ValidatedData<Float> validate(float data) throws ValidationException {
         if (data <= 0) {
             throw new ValidationException("Weight must be greater than zero");
         }

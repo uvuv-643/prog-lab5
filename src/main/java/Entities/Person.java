@@ -1,16 +1,15 @@
 package Entities;
 
 import Input.Validation.CustomValidators.*;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    public ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private int height; //Значение поля должно быть больше 0
     private float weight; //Значение поля должно быть больше 0
     private Color eyeColor; //Поле не может быть null
@@ -30,7 +29,7 @@ public class Person {
         this.location = location;
     }
 
-    public static Person personCreator(Long id, String name, Coordinates coordinates, int height, int weight, Color eyeColor, Country nationality, Location location) throws ValidationException {
+    public static Person personCreator(Long id, String name, Coordinates coordinates, int height, float weight, Color eyeColor, Country nationality, Location location) throws ValidationException {
         NameValidator nameValidator = new NameValidator();
         CoordinatesValidator coordinatesValidator = new CoordinatesValidator();
         HeightValidator heightValidator = new HeightValidator();
@@ -49,10 +48,6 @@ public class Person {
         locationValidator.validate(location);
 
         return new Person(id, name, coordinates, created_at, height, weight, eyeColor, nationality, location);
-    }
-
-    public static void input() {
-
     }
 
     public Long getId() {
@@ -126,4 +121,53 @@ public class Person {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public int compareTo(Person person) {
+        return Integer.compare(this.height, person.getHeight());
+    }
+
+    @Override
+    public String toString() {
+
+        String id = String.format("ID: %s\n", this.id);
+        String name = String.format("Name: %s\n", this.name);
+        String coordinates = String.format("Coordinates: %s\n", this.coordinates);
+        String createdAt = String.format("Created at: %s\n", this.creationDate);
+        String height = String.format("Height: %s\n", this.height);
+        String weight = String.format("Weight: %s\n", this.weight);
+
+        String eyeColor;
+        if (this.eyeColor != null) {
+            eyeColor = String.format("Eye color: %s\n", this.eyeColor);
+        } else {
+            eyeColor = "Eye color is not specified";
+        }
+
+        String nationality;
+        if (this.nationality != null) {
+            nationality = String.format("Nationality: %s\n", this.nationality);
+        } else {
+            nationality = "Nationality is not specified";
+        }
+
+        String location;
+        if (this.location != null) {
+            location = String.format("Location: %s\n", this.location);
+        } else {
+            location = "Location is not specified";
+        }
+
+        return  id +
+                name +
+                coordinates +
+                createdAt +
+                height +
+                weight +
+                eyeColor +
+                nationality +
+                location;
+
+    }
+
 }

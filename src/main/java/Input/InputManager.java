@@ -2,11 +2,8 @@ package Input;
 
 import Entities.*;
 import Input.Validation.CustomValidators.*;
-import Input.Validation.ValidatedData;
-import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -55,7 +52,7 @@ public class InputManager {
         }
     }
 
-    public int inputPersonWeight() {
+    public float inputPersonWeight() {
         System.out.println("Input weight in the next line (integer): ");
         String weight = scanner.nextLine();
         try {
@@ -115,7 +112,7 @@ public class InputManager {
         String name = this.inputPersonName();
         Coordinates coordinates = this.inputPersonCoordinates();
         int height = this.inputPersonHeight();
-        int weight = this.inputPersonWeight();
+        float weight = this.inputPersonWeight();
         Color eyeColor = this.inputPersonEyeColor().get();
         Country nationality = this.inputPersonNationality().get();
         Location location = this.inputPersonLocation().get();

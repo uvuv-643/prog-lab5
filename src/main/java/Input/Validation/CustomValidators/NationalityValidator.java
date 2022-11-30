@@ -1,10 +1,9 @@
 package Input.Validation.CustomValidators;
 
-import Entities.Color;
 import Entities.Country;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import java.util.Optional;
 
@@ -17,10 +16,10 @@ public class NationalityValidator implements Validator {
         }
         Optional<Country> nationality = switch (data) {
             case null, "" -> Optional.empty();
-            case "Russia" -> Optional.of(Country.RUSSIA);
-            case "China" -> Optional.of(Country.CHINA);
-            case "Thailand" -> Optional.of(Country.THAILAND);
-            case "Vatican" -> Optional.of(Country.VATICAN);
+            case "RUSSIA" -> Optional.of(Country.RUSSIA);
+            case "CHINA" -> Optional.of(Country.CHINA);
+            case "THAILAND" -> Optional.of(Country.THAILAND);
+            case "VATICAN" -> Optional.of(Country.VATICAN);
             default -> null;
         };
         if (nationality == null) {

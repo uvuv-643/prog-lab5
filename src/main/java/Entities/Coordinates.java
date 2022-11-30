@@ -1,6 +1,5 @@
 package Entities;
 
-import java.time.ZonedDateTime;
 
 public class Coordinates {
     private Float x; //Значение поля должно быть больше -600, Поле не может быть null
@@ -26,4 +25,12 @@ public class Coordinates {
     public void setY(Float y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        String x = String.format("X: %.4f \n", this.x);
+        String y = String.format("Y: %.4f \n", this.y);
+        return x + y;
+    }
+
 }

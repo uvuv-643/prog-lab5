@@ -3,7 +3,7 @@ package Input.Validation.CustomValidators;
 import Entities.Person;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ public class IDValidator implements Validator {
         if (data == null) {
             throw new ValidationException("ID cannot be null");
         }
+        data = data.trim();
         long id;
         try {
             id = Long.parseLong(data);
@@ -27,11 +28,20 @@ public class IDValidator implements Validator {
     }
 
     public ValidatedData<Long> validateUnique(Long Id, ArrayList<Person> collection) throws ValidationException {
-        boolean isUnique = collection.stream().anyMatch((element) -> element.getId().equals(Id));
+        boolean isUnique = collection.stream().noneMatch((element) -> element.getId().equals(Id));
         if (isUnique) {
             return new ValidatedData<>(Id);
         }
         throw new ValidationException("ID is not unique");
+    }
+
+    public ValidatedData<Long> validateNotUnique(Long Id, ArrayList<Person> collection) throws ValidationException {
+        boolean isUnique = collection.stream().noneMatch((element) -> element.getId().equals(Id));
+        if (isUnique) {
+            throw new ValidationException("ID is unique");
+        }
+        return new ValidatedData<>(Id);
+
     }
 
 }

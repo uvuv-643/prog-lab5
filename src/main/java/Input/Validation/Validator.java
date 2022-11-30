@@ -1,6 +1,6 @@
 package Input.Validation;
 
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public interface Validator {
 

@@ -1,9 +1,8 @@
 package Input.Validation.CustomValidators;
 
-import Entities.Coordinates;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public class HeightValidator implements Validator {
 
@@ -12,6 +11,7 @@ public class HeightValidator implements Validator {
         if (data == null) {
             throw new ValidationException("Height cannot be null");
         }
+        data = data.trim();
         int height;
         try {
             height = Integer.parseInt(data);

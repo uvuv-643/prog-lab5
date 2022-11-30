@@ -3,7 +3,7 @@ package Input.Validation.CustomValidators;
 import Entities.Coordinates;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public class CoordinatesValidator implements Validator {
 

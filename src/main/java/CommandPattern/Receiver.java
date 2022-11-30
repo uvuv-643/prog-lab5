@@ -1,46 +1,56 @@
 package CommandPattern;
 
+import App.Terminal;
+import Entities.Country;
 import Entities.Person;
+import Input.FileManager.FileManager;
 import Input.Generators.IDGenerator;
 import Input.InputManager;
 import Input.Validation.CustomValidators.IDValidator;
-import exceptions.ValidationException;
+import Input.Validation.CustomValidators.IndexValidator;
+import Input.Validation.CustomValidators.NationalityValidator;
+import Exceptions.ValidationException;
 
-import java.lang.reflect.Array;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 public class Receiver {
 
     private final ZonedDateTime creationDate;
+    private final InputManager inputManager = new InputManager();
 
     public Receiver() {
         creationDate = ZonedDateTime.now();
     }
 
-    public String help(Invoker invoker) {
-        StringBuilder commandsString = new StringBuilder();
-        for (Command command : invoker.getCommandMap().values()) {
-            commandsString.append(command.getHelp()).append("\n");
+    public boolean info(ArrayList<Person> collection) {
+        String typeOfCollection = String.format("Type of collection: %s", collection.getClass());
+        String dateOfInitialization = String.format("Initialization date: %s", creationDate);
+        String countOfElements = String.format("Elements in collection: %d", collection.size());
+        System.out.printf("%s \n%s \n%s \n", typeOfCollection, dateOfInitialization, countOfElements);
+        return true;
+    }
+
+    public boolean show(ArrayList<Person> collection) {
+        if (collection.isEmpty()) {
+            System.out.println("Collection is empty");
+        } else {
+            System.out.println("Elements in collection:");
+            System.out.println();
+            for (Person person : collection) {
+                System.out.println(person);
+            }
         }
-        return commandsString.toString();
-    }
-
-    public void exit() {
-        System.exit(0);
-    }
-
-    public void clear(ArrayList<Person> collection) {
-        collection.clear();
+        return true;
     }
 
     public boolean add(ArrayList<Person> collection) {
-        InputManager inputManager = new InputManager();
         try {
             IDGenerator idGenerator = new IDGenerator(collection);
             long generatedId = idGenerator.generate();
-            Person person = inputManager.inputPerson(generatedId);
+            Person person = this.inputManager.inputPerson(generatedId);
             collection.add(person);
             return true;
         } catch (ValidationException exception) {
@@ -49,164 +59,159 @@ public class Receiver {
         }
     }
 
-    public String addIfMin(TreeSet<City> collection) {
-        if (collection.isEmpty()) {
-            return "Коллекция пуста. Создайте хотя бы один элемент, чтобы использовать эту команду.";
-        }
-        System.out.println("Следующий введённый город будет добавлен в колекцию в случае, если его поле population будет " +
-                "наименьшим в коллекции.");
-        System.out.println("На данный момент в коллекции наименьшее значение поля population = " + collection.first().getPopulation());
-        return Adder.addCityIfMin(collection);
-    }
-
-    public String show(ArrayList<Person> collection) {
-        if (collection.isEmpty()) {
-            return "Коллекция пуста.";
-        } else {
-            System.out.println("Элементы коллекции в строковом предствлении: ");
-            StringBuilder s = new StringBuilder();
-            for (Person person : collection) {
-                s.append(person);
-            }
-            return s.toString();
-        }
-    }
-
-    public String filterStartsWithName(TreeSet<City> collection, String name) {
-        System.out.println("Будут выведены элементы коллекции, значение поля name которых начинается с подстроки " + name + ":");
-        StringBuilder namesString = new StringBuilder();
-        for (City city : collection) {
-            if (city.getName().startsWith(name)) {
-                namesString.append(city).append(", ");
-            }
-        }
-        if (namesString.toString().isEmpty()) {
-            return "Элементов с таким условием в коллекции не найдено!";
-        } else {
-            return namesString.deleteCharAt(namesString.length() - 2).toString();
-        }
-    }
-
-    public String printDescending(TreeSet<City> collection) {
-        System.out.println("Элементы коллекции в порядке убывания (обратном): ");
-        if (collection.isEmpty()) {
-            return "Коллекция пуста.";
-        } else {
-            StringBuilder descCollection = new StringBuilder();
-            Iterator<City> i = collection.descendingIterator();
-            while (i.hasNext()) {
-                descCollection.append(i.next()).append(", ");
-            }
-            return descCollection.deleteCharAt(descCollection.length() - 2).toString();
-        }
-    }
-
-    public String executeScript(Invoker invoker, TreeSet<City> collection, String filename) throws FileNotFoundException {
-
-        Terminal terminal = new Terminal(invoker, collection);
-
-        return terminal.startFile(filename);
-
-    }
-
-    public String removeAllByGovernment(TreeSet<City> collection, String argument) {
-
-        for (Government government : Government.values()) {
-
-            if (government.toString().equals(argument)) {
-
-                boolean flag = false;
-
-                for (City city : collection) {
-                    if (city.getGovernment().equals(government)) {
-                        collection.remove(city);
-                        flag = true;
+    public boolean update(ArrayList<Person> collection, String idRaw) {
+        long id;
+        IDValidator idValidator = new IDValidator();
+        try {
+            id = idValidator.validate(idRaw).getValidatedData();
+            idValidator.validateNotUnique(id, collection);
+            try {
+                Person person = this.inputManager.inputPerson(id);
+                int updatedCount = 0;
+                for (Person collectionPerson : collection) {
+                    if (collectionPerson.getId().equals(id)) {
+                        collection.set(collection.indexOf(collectionPerson), person);
+                        updatedCount++;
                     }
                 }
-                if (flag) {
-                    return "Элементы коллекции с заданным условием удалены.";
-                } else {
-                    return "Элементов коллекции с заданным полем government не найдено.";
+                if (updatedCount == 0) {
+                    throw new ValidationException("Not found element with this id");
                 }
+                return true;
+            } catch (ValidationException exception) {
+                System.out.println("Internal server error. " + exception.getMessage());
+                return false;
             }
-
+        } catch (ValidationException exception) {
+            System.out.println("Passed incorrect ID");
+            return false;
         }
-
-        return "Такого поля Government не существует.";
     }
 
-    public String removeById(TreeSet<City> collection, String argument) {
-        Long id;
+    public boolean removeById(ArrayList<Person> collection, String idRaw) {
+        long id;
+        IDValidator idValidator = new IDValidator();
         try {
-            id = Long.parseLong(argument);
-        } catch (NumberFormatException e) {
-            id = null;
-        }
-        if (id == null) {
-            return "Аргумент id передан неверно.";
-        }
-        String element = "Элемента с данным id не существует.";
-        for (City city : collection) {
-            if (city.getId().equals(id)) {
-                element = city + " удалён из коллекции.";
-                collection.remove(city);
-                break;
+            id = idValidator.validate(idRaw).getValidatedData();
+            idValidator.validateNotUnique(id, collection);
+            try {
+                Optional<Person> elementInCollection = collection.stream().filter((element) -> element.getId().equals(id)).findFirst();
+                elementInCollection.ifPresent(collection::remove);
+                if (elementInCollection.isEmpty()) {
+                    throw new ValidationException("Not found element with this id");
+                }
+                return true;
+            } catch (ValidationException exception) {
+                System.out.println("Internal server error. " + exception.getMessage());
+                return false;
             }
+        } catch (ValidationException exception) {
+            System.out.println("Passed incorrect ID");
+            return false;
         }
-        return element;
     }
 
-    public String removeGreater(TreeSet<City> collection) {
-        System.out.println("Создайте элемент.");
-        City delCity = Adder.createCity();
-        collection.removeIf(city -> delCity.compareTo(city) > 0);
-        return "Элементы, меньшие, чем заданный, удалены.";
+    public void clear(ArrayList<Person> collection) {
+        collection.clear();
     }
 
-    public String removeLower(TreeSet<City> collection) {
-        System.out.println("Создайте элемент.");
-        City delCity = Adder.createCity();
-        collection.removeIf(city -> delCity.compareTo(city) < 0);
-        return "Элементы, меньшие, чем заданный, удалены.";
-    }
-
-    public String info(ArrayList<Person> collection) {
-        String typeOfCollection = String.format("Тип коллекции: %s", collection.getClass());
-        String dateOfInitialization = String.format("Дата инициализации: %s", creationDate);
-        String countOfElements = String.format("Количество элементов коллекции: %s", collection.size());
-        return String.format("%s \n%s \n%s \n", typeOfCollection, dateOfInitialization, countOfElements);
-    }
-
-    public String updateId(TreeSet<City> collection, String idArgument) {
-        Long id;
+    public boolean save(ArrayList<Person> collection) {
+        FileManager worker = new FileManager();
         try {
-            id = Long.parseLong(idArgument);
-        } catch (NumberFormatException e) {
-            id = null;
+            worker.writeInFile(collection);
+        } catch (IOException exception) {
+            System.out.println("Passed incorrect argument or you have no access to file");
+            return false;
         }
-        if (id == null) {
-            return "Аргумент id передан неверно.";
-        }
-        String result = "Элемента с данным id не существует.";
-        for (City city : collection) {
-            if (city.getId().equals(id)) {
-                System.out.println("Будет произведена замена элемента " + city);
-                City newCity = Adder.createCity();
-                newCity.setId(id);
-                collection.remove(city);
-                collection.add(newCity);
-                result = "Элемент успешно изменен. Его поле id останется прежним.";
-            }
-        }
-        return result;
+        return true;
     }
 
-    public String save(TreeSet<City> collection) {
+    public boolean executeScript(Invoker invoker, ArrayList<Person> collection, String filename) {
+        try {
+            Terminal terminal = new Terminal(invoker, collection);
+            terminal.startFile(filename);
+            return true;
+        } catch (FileNotFoundException exception) {
+            System.out.println("File was not found. Cannot execute script");
+            return false;
+        }
+    }
 
-        WorkWithFile worker = new WorkWithFile();
+    public void exit() {
+        System.exit(0);
+    }
 
-        return worker.writeInFile(collection);
+    public boolean removeAt(ArrayList<Person> collection, String indexRaw) {
+        int index;
+        IndexValidator indexValidator = new IndexValidator();
+        try {
+            index = indexValidator.validate(indexRaw).getValidatedData();
+            collection.remove(index);
+            return true;
+        } catch (ValidationException exception) {
+            System.out.println(exception.getMessage());
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("Index out of bounds");
+        }
+        return false;
 
+    }
+
+    public boolean addIfMin(ArrayList<Person> collection) {
+        try {
+            IDGenerator idGenerator = new IDGenerator(collection);
+            long generatedId = idGenerator.generate();
+            Person person = this.inputManager.inputPerson(generatedId);
+            Optional<Person> min = collection.stream().min(Comparator.comparingInt(Person::getHeight));
+            min.ifPresentOrElse((element) -> {
+                if (person.compareTo(element) < 0) {
+                    collection.add(person);
+                }
+            }, () -> collection.add(person));
+            return false;
+        } catch (ValidationException exception) {
+            System.out.println("Internal server error. " + exception.getMessage());
+            return false;
+        }
+    }
+
+    public boolean reorder(ArrayList<Person> collection) {
+        Collections.reverse(collection);
+        return true;
+    }
+
+    public boolean filterGreaterThanNationality(ArrayList<Person> collection, String nationalityRaw) {
+        NationalityValidator nationalityValidator = new NationalityValidator();
+        try {
+            Country nationality = nationalityValidator.validate(nationalityRaw).getValidatedData().get();
+            long targetPopulation = nationality.getPopulation();
+            ArrayList<Person> filteredCollection = new ArrayList<>(collection.stream().filter((element) -> element.getNationality().getPopulation() > targetPopulation).toList());
+            this.show(filteredCollection);
+            return true;
+        } catch (ValidationException exception) {
+            System.out.println(exception.getMessage());
+            return false;
+        }
+    }
+
+    public boolean printDescending(ArrayList<Person> collection) {
+        ArrayList<Person> reversedCollection = new ArrayList<>(collection);
+        Collections.reverse(reversedCollection);
+        this.show(reversedCollection);
+        return true;
+    }
+
+    public boolean printFieldDescendingLocation(ArrayList<Person> collection) {
+        Country[] countries = collection.stream().map(Person::getNationality).sorted(Comparator.comparingLong(Country::getPopulation)).toArray(Country[]::new);
+        if (countries.length == 0) {
+            System.out.println("Collection in empty");
+        } else {
+            System.out.println("Elements in collection: ");
+            for (Country country : countries) {
+                System.out.println(country);
+            }
+        }
+        return true;
     }
 
 }

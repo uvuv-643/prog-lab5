@@ -1,22 +1,20 @@
 package Input.Validation.CustomValidators;
 
-import Entities.Coordinates;
-import Entities.Country;
 import Entities.Location;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LocationValidator implements Validator {
 
     private final String LOCATION_DELIMITER = " ";
+
+    // TODO: command to enum
 
     private String[] parseLocationStringToArray(String data) {
         String[] location = data.replaceAll("[\s]{2,}", " ").trim().split(this.LOCATION_DELIMITER);

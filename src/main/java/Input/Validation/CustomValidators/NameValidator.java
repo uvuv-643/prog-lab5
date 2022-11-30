@@ -2,7 +2,7 @@ package Input.Validation.CustomValidators;
 
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public class NameValidator implements Validator {
 
