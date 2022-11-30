@@ -18,8 +18,7 @@ public class Clear implements Command {
     @Override
     public boolean execute(Invoker invoker, ArrayList<Person> collection, String[] argument) {
         if (argument.length == 0) {
-            receiver.clear(collection);
-            return true;
+            return receiver.clear(collection);
         } else {
             System.out.println("Command <clear> is used without arguments");
             return false;

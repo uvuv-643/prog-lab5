@@ -1,9 +1,9 @@
 package Input.Validation.CustomValidators;
 
 import Entities.Country;
+import Exceptions.ValidationException;
 import Input.Validation.ValidatedData;
 import Input.Validation.Validator;
-import Exceptions.ValidationException;
 
 import java.util.Optional;
 

@@ -1,13 +1,10 @@
-import App.AddCommands;
-import App.Terminal;
+package App;
+
 import CommandPattern.Invoker;
 import CommandPattern.Receiver;
 import Entities.Person;
 import Input.FileManager.FileManager;
-import Exceptions.ValidationException;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -3,18 +3,21 @@ package CommandPattern;
 import App.Terminal;
 import Entities.Country;
 import Entities.Person;
+import Exceptions.ValidationException;
 import Input.FileManager.FileManager;
 import Input.Generators.IDGenerator;
 import Input.InputManager;
 import Input.Validation.CustomValidators.IDValidator;
 import Input.Validation.CustomValidators.IndexValidator;
 import Input.Validation.CustomValidators.NationalityValidator;
-import Exceptions.ValidationException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Optional;
 
 public class Receiver {
 
@@ -111,8 +114,9 @@ public class Receiver {
         }
     }
 
-    public void clear(ArrayList<Person> collection) {
+    public boolean clear(ArrayList<Person> collection) {
         collection.clear();
+        return true;
     }
 
     public boolean save(ArrayList<Person> collection) {
@@ -168,7 +172,7 @@ public class Receiver {
                     collection.add(person);
                 }
             }, () -> collection.add(person));
-            return false;
+            return min.isEmpty() || person.compareTo(min.get()) < 0;
         } catch (ValidationException exception) {
             System.out.println("Internal server error. " + exception.getMessage());
             return false;
@@ -202,11 +206,11 @@ public class Receiver {
     }
 
     public boolean printFieldDescendingLocation(ArrayList<Person> collection) {
-        Country[] countries = collection.stream().map(Person::getNationality).sorted(Comparator.comparingLong(Country::getPopulation)).toArray(Country[]::new);
+        Country[] countries = collection.stream().sorted(Comparator.reverseOrder()).map(Person::getNationality).toArray(Country[]::new);
         if (countries.length == 0) {
             System.out.println("Collection in empty");
         } else {
-            System.out.println("Elements in collection: ");
+            System.out.println("Field <Location> in collection: ");
             for (Country country : countries) {
                 System.out.println(country);
             }

@@ -1,7 +1,7 @@
 package Entities;
 
-import Input.Validation.CustomValidators.*;
 import Exceptions.ValidationException;
+import Input.Validation.CustomValidators.*;
 
 import java.time.ZonedDateTime;
 

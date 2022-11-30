@@ -1,8 +1,8 @@
 package Input;
 
 import Entities.*;
-import Input.Validation.CustomValidators.*;
 import Exceptions.ValidationException;
+import Input.Validation.CustomValidators.*;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -53,7 +53,7 @@ public class InputManager {
     }
 
     public float inputPersonWeight() {
-        System.out.println("Input weight in the next line (integer): ");
+        System.out.println("Input weight in the next line (float): ");
         String weight = scanner.nextLine();
         try {
             return this.weightValidator.validate(weight).getValidatedData();

@@ -6,6 +6,7 @@ import Entities.Person;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Terminal {
@@ -64,14 +65,7 @@ public class Terminal {
     protected boolean lineHandler(String line) throws NullPointerException {
         String[] commandLine = line.replaceAll("\s{2,}", " ").trim().split("\s");
         String command = commandLine[0].trim();
-        if (commandLine.length == 1) {
-            return invoker.execute(command, collection, new String[]{});
-        } else if (commandLine.length == 2) {
-            String argument = commandLine[1];
-            return invoker.execute(command, collection, new String[]{argument});
-        } else {
-            throw new NullPointerException();
-        }
+        return invoker.execute(command, collection, Arrays.copyOfRange(commandLine, 1, commandLine.length));
     }
 
 }

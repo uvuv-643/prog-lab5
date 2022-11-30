@@ -1,9 +1,7 @@
 package App;
 
-import CommandPattern.CommandName;
 import CommandPattern.Invoker;
 import CommandPattern.Receiver;
-import Commands.*;
 
 public class AddCommands {
 

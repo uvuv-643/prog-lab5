@@ -3,7 +3,6 @@ package Commands;
 import CommandPattern.Command;
 import CommandPattern.CommandName;
 import CommandPattern.Invoker;
-import CommandPattern.Receiver;
 import Entities.Person;
 
 import java.util.ArrayList;

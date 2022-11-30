@@ -1,8 +1,8 @@
 package Input.Generators;
 
 import Entities.Person;
-import Input.Validation.CustomValidators.IDValidator;
 import Exceptions.ValidationException;
+import Input.Validation.CustomValidators.IDValidator;
 
 import java.util.ArrayList;
 
